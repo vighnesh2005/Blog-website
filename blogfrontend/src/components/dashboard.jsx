@@ -4,17 +4,19 @@ import BlogBox from './blogbox.jsx'
 function Dashboard() {
   return (
     <>
-    <div>
+    <div className="Hero-section">
       <video autoPlay loop muted className="video-background">
         <source src={bgVideo} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
       <div className="Hero">
         <pre>
-        Welcome The blog Buddy.
+        Welcome To The blog Buddy.
         <br/>
         The ultimate blogging website
+        <br/>
         </pre>
+        <div className="create-blog"><button>Create Your Blog</button></div>
       </div>
     </div>
     <div className="all-blogs">
