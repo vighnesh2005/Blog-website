@@ -8,11 +8,12 @@ body{
 }
 .navbar{
     position: sticky;
+    padding: 0 20px;
     z-index: 2;
     width: 100%;
-    height: 50px;
+    height: 60px;
     background-color: #FFCE32;
-    border-radius: 10px;
+    border: solid 3px black;
     display: flex;
     align-items: center;
     justify-content: left;
@@ -99,6 +100,83 @@ body{
     padding: 10px;
     border-radius: 10px;
 }
+.navbar form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFCE32;
+    margin: 5rem;
+    border-radius: 10px;
+}
+
+.navbar form input{
+    width: 400px;
+    height: 40px;
+    border-radius: 10px;
+    border:solid 3px brown;
+    font-size: larger;
+    padding:5px;
+    border-right: none;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    background-color: #FFCE32;
+}
+
+.navbar form button{
+    width: 100px;
+    height: 40px;
+    border:solid 3px brown;
+    background-color: orangered;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    cursor: pointer;
+}
+
+.navbar form button:hover{
+    background-color: orange;
+    color: black;
+    transition: 0.5s;
+    width: 105px;
+    height: 42px;
+}
+
+.navbar form input:hover{
+    border:solid 3px orangered;
+    background-color: #FFCE32;
+    transition: 0.5s;
+    width: 405px;
+    height: 42px;
+}
+
+.navbar form input:focus{
+    border:solid 3px red;
+    background-color: #FFCE32;
+    transition: 0.5s;
+}
+
+.navbar form select{
+    width: 130px;
+    height: 40px;
+    border:solid 3px brown;
+    color: brown;
+    text-shadow: 1px 1px 1px black;
+    font-size: larger;
+    padding:5px;
+    border-right: none;
+    background-color: #FFCE32;
+    overflow: auto;
+}
+
+.navbar form select:hover{
+    border:solid 3px orangered;
+    background-color: #FFCE32;
+    transition: 0.5s;
+    width: 135px;
+    height: 42px;
+}
 
 .navbar__auth .logout:hover{
     background-color: #FFCE32;
@@ -166,6 +244,8 @@ body{
     color: white;
     text-align: center;
     width: 100%;
+    height: 60%;;
+    border: solid 3px black;
   }
   
 .Hero{
@@ -183,25 +263,95 @@ body{
     text-shadow: 10px 10px 10px black ;
 }
 
-.all-blogs{
-    display: flex;
-    justify-content: wrap-around;
-    align-items: center;
-    padding: 50px;
-    background-color: white;
-    flex-wrap: wrap;
+.all-blogs {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 15px 0;
+    border: solid 3px black;    
 }
+
+.scroll-content {
+    display: flex;
+    width: max-content;
+    animation: scroll 20s linear infinite;
+}
+
+.scroll-content:hover {
+    animation-play-state: paused;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.blog-card {
+    min-width: 250px;
+    height: 150px;
+    margin-right: 20px;
+    background: lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.all-blogs::before,
+.all-blogs::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 15%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.all-blogs::before {
+    left: 0;
+    background: linear-gradient(to right, #FFCE32 0%, rgba(255,255,255,0) 100%);
+}
+
+.all-blogs::after {
+    right: 0;
+    background: linear-gradient(to left, #FFCE32 0%, rgba(255,255,255,0) 100%);
+}
+
+
 
 .blog{
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
     flex-direction: column;
     background-color: white;
     padding: 20px;
     border: solid 2px black;
     border-radius: 10px;
     margin: 20px;
+    width: 350px;
+    height: 350px;
+    cursor: pointer;
+}
+
+.blog img{
+    width: 100%;
+    height: 80%;
+    border: solid 2px black;    
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.blog:hover{
+    transition: 0.5s;
+    transform: scale(1.05);
+    box-shadow: 5px 5px 10px black;
 }
 
   

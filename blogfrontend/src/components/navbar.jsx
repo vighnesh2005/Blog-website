@@ -26,6 +26,15 @@ function Navbar(props) {
         <a href="/about">About</a>
         <a href="/contact">Contact</a>
         </div>
+        <form action="/search" method="post">
+        <input type="text" name="search-bar" id="search-bar" />
+        <select name="category" id="category">
+            <option value="all">author</option>
+            <option value="tech">category</option>
+            <option value="lifestyle">name of the blog</option>
+        </select>
+        <button type="submit" className="search-button">Search</button>
+        </form>
         <>{mycomponent()}</>
     </nav>
   );

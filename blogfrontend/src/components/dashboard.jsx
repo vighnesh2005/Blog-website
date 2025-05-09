@@ -18,6 +18,7 @@ function Dashboard() {
       </div>
     </div>
     <div className="all-blogs">
+      <div className="scroll-content">
         <BlogBox></BlogBox>
         <BlogBox></BlogBox>
         <BlogBox></BlogBox>
@@ -28,7 +29,12 @@ function Dashboard() {
         <BlogBox></BlogBox>
         <BlogBox></BlogBox>
         <BlogBox></BlogBox>
-        <BlogBox></BlogBox>
+        </div>
+        <script>
+        const scrollContent = document.querySelector('.scroll-content');
+        scrollContent.innerHTML += scrollContent.innerHTML;
+        </script>
+
     </div>
     </>
   );
