@@ -1,0 +1,207 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: #FFCE32;
+}
+.navbar{
+    position: sticky;
+    z-index: 2;
+    width: 100%;
+    height: 50px;
+    background-color: #FFCE32;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding: 0 20px;
+    top: 0%;
+}
+
+.navbar__logo{
+    font-size: 20px;
+    font-weight: bold;
+    color:  black;
+        margin: 20px;
+    padding: 10px;
+}
+.essentials{
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;  
+    align-items: center;
+}
+.essentials a{
+    color: black;
+    text-decoration: none;
+    font: bold 16px sans-serif;
+    padding: 10px;
+}
+
+.navbar__auth{
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;  
+    align-items: center;
+    position: absolute;
+    right:0%;
+    margin:10px;
+    padding: 10px;
+}
+.navbar__auth .login{
+    color:#1D63FF;
+    text-decoration: none;
+    border: solid 3px #1D63FF;
+    padding: 10px;
+    border-radius: 10px;
+}
+.navbar__auth .signup{
+    background-color: #1D63FF;
+    text-decoration: none;
+    color: white;
+    border: solid 3px #1D63FF;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.navbar__auth .login:hover{
+    background-color: #1D63FF;
+    color: white;
+    transition: 0.5s;
+}
+.navbar__auth .signup:hover{
+    background-color: #FFCE32;
+    color: #1D63FF;
+    transition: 0.5s;
+}
+
+.navbar__auth .profile{
+    color: #1D63FF;
+    text-decoration: none;
+    border: solid 3px #1D63FF;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.navbar__auth .profile:hover{
+    background-color: #1D63FF;
+    color: white;
+    transition: 0.5s;
+}
+
+.navbar__auth .logout{
+    color: white;
+    background-color: #1D63FF;
+    text-decoration: none;
+    border: solid 3px #1D63FF;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.navbar__auth .logout:hover{
+    background-color: #FFCE32;
+    color: #1D63FF;
+    transition: 0.5s;
+}
+
+.essentials a:hover{
+    color: red;
+    transition: 0.5s;
+}
+
+.signup-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 50px;
+}
+
+.signup-container h1{
+    font-size: 30px;
+    font-weight: bold;
+    color: #1D63FF;
+}
+
+.signup-container div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.signup-container div input{
+    width: 300px;
+    height: 40px;
+    border-radius: 10px;
+    border: solid 2px #1D63FF;
+    padding: 10px;
+    margin: 20px;
+    overflow: auto;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: bold;
+    color: black;
+}
+
+.signup-container div button{
+    width: 300px;
+    height: 40px;
+    border-radius: 10px;
+    border: solid 2px #1D63FF;
+    background-color: #1D63FF;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 20px;
+}
+  
+.video-background {
+    position: relative;
+    z-index: -1;
+    color: white;
+    text-align: center;
+    width: 100%;
+  }
+  
+.Hero{
+    position: absolute;
+    z-index: 1;
+    top: 50px;
+}
+.Hero pre{
+    padding: 20px;
+    border-radius: 10px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color:crimson;
+    font-size: 70px;
+    font-weight: bold;
+    text-shadow: 10px 10px 10px black ;
+}
+
+.all-blogs{
+    display: flex;
+    justify-content: wrap-around;
+    align-items: center;
+    padding: 50px;
+    background-color: white;
+    flex-wrap: wrap;
+}
+
+.blog{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    padding: 20px;
+    border: solid 2px black;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+  
