@@ -24,7 +24,7 @@ function MyBlogs() {
           return;
         }
 
-        setBlogs(res.data.blogs); // Assuming your backend returns a list of blog objects
+        setBlogs(res.data.blogs);
       } catch (err) {
         console.log("something went wrong");
       }
@@ -37,6 +37,7 @@ function MyBlogs() {
       {blogs.map((blog, index) => (
         <Myblogbox
           key={index}
+          id = {blog.id}
           picture={blog.picture}
           title={blog.title}
           category={blog.category}

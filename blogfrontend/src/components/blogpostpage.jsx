@@ -28,6 +28,7 @@ function BlogPostPage() {
   const [title,setTitle] = useState('');
   const [category,setCategory] = useState('')
   const {user,setIsLoggedIn,token} = useContext(Mycontext);
+  
   const handlesubmit = async (e)=>{
     e.preventDefault();
     
@@ -37,7 +38,7 @@ function BlogPostPage() {
     }
 
     try{
-      const res = await axios.post("http:localhost:8000/saveblog",
+      const res = await axios.post("http://localhost:8000/saveblog",
         {
           title:title,
           content:content,
@@ -51,17 +52,18 @@ function BlogPostPage() {
           }
         }
       );
+        if(res.status === 'Not Logged in'){
+          setIsLoggedIn(false);  
+          navigate("/login");
+            return;
+        }
+        alert("Blog Saved successfully...");
+        navigate("/myprofile"); 
     }catch(exe){
       console.log("some error occured");
       return;
     }
-    if(res.status === 'Not Logged in'){
-      setIsLoggedIn(false);  
-      navigate("/login");
-      return;
-    }
-    alert("Blog Saved successfully...");
-    navigate("/profile");
+
   }
   return (
     <form className='Blogform' onSubmit={handlesubmit}>

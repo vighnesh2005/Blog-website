@@ -7,7 +7,7 @@ import bcrypt
 import mysql.connector
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
-import io
+import re
 
 load_dotenv()
 
@@ -29,6 +29,10 @@ def verify_token(token: str) -> bool:
         return True
     except JWTError:
         return False
+
+def extract_first_image(html_content):
+    match = re.search(r'<img\s+[^>]*src=["\']([^"\']+)["\']', html_content)
+    return match.group(1) if match else None
 
 
 con = mysql.connector.connect(
@@ -55,6 +59,11 @@ class SaveBlog(BaseModel):
     content:str
     token:str
     title:str
+    category:str
+
+class MyBlogs(BaseModel):
+    username:str
+    token:str
 
 app = FastAPI()
 
@@ -109,19 +118,58 @@ def login(user: UserLogin):
     }
 
 @app.post("/saveblog")
-def saveblog(data:SaveBlog):
-    if(not verify_token(data.token)):
-        return {"status":"Not Logged in"}
+def saveblog(data: SaveBlog):
+    if not verify_token(data.token):
+        return {"status": "Not Logged in"}
+    
     username = data.username
-    blog = data.content
     title = data.title
-    category=data.category
+    content = data.content
+    category = data.category
 
+    cur.execute("SELECT id FROM users WHERE username = %s", (username,))
+    user_row = cur.fetchone()
+    
+    if not user_row:
+        return {"status": "User not found"}
 
-    cur.execute("SELECT id FROM users WHERE username = (%s)",[username,])
-    userid = cur.fetchone()[0]
+    user_id = user_row[0]
 
-    cur.execute("INSERT INTO posts (user_id,title,content) VALUES(%s,%s,%s,%s)",[userid,title,blog,category])
+    cur.execute(
+        "INSERT INTO posts (user_id, title, content, category) VALUES (%s, %s, %s, %s)",
+        (user_id, title, content, category)
+    )
     con.commit()
 
-    return {"status":"OK"}
+    return {"status": "OK"}
+
+@app.post("/myblogs")
+def myblogs(data: MyBlogs):
+    username = data.username
+    token = data.token
+
+    if not verify_token(token):
+        return {"status": "Not Logged in"}
+    
+    cur.execute("SELECT id FROM users WHERE username = %s", (username,))
+    user_row = cur.fetchone()
+    if not user_row:
+        return {"status": "User not found"}
+    user_id = user_row[0]
+
+    cur.execute("SELECT id, title, content, category, created_at FROM posts WHERE user_id = %s", (user_id,))
+    posts = cur.fetchall()
+
+    blogs = []
+    for post in posts:
+        blog_id, title, content, category, created_at = post
+        picture = extract_first_image(content)
+        blogs.append({
+            "id": blog_id,
+            "picture": picture,
+            "title": title,
+            "category": category,
+            "createdat": created_at
+        })
+
+    return {"status": "OK", "blogs": blogs}

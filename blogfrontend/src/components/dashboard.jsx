@@ -1,8 +1,12 @@
 import bgVideo from "../assets/video.mp4";
 import BlogBox from './blogbox.jsx'
-
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
+  const navigate = useNavigate()
+  function handelclick(){
+    navigate('/blogpost')
+  }
   return (
     <>
     <div className="Hero-section">
@@ -17,7 +21,7 @@ function Dashboard() {
         The ultimate blogging website
         <br/>
         </pre>
-        <div className="create-blog"><button>Create Your Blog</button></div>
+        <div className="create-blog" onClick={handelclick}><button>Create Your Blog</button></div>
       </div>
     </div>
     <div className="all-blogs">

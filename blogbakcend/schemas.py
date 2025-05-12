@@ -37,3 +37,8 @@ CREATE TABLE IF NOT EXISTS posts(
     FOREIGN KEY(user_id) REFERENCES users(id)
 )""")
 
+print('before')
+cur.execute("ALTER TABLE posts MODIFY content LONGTEXT")
+mydb.commit()
+
+print('after')
