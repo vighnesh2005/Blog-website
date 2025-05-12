@@ -13,7 +13,7 @@ function MyBlogs() {
     const fetchBlogs = async () => {
       try {
         const res = await axios.post("http://localhost:8000/myblogs", {
-          username: user,
+          username: user, 
           token: token
         });
 

@@ -1,13 +1,29 @@
+import { useEffect, useState } from "react";
 import bgVideo from "../assets/video.mp4";
 import BlogBox from './blogbox.jsx'
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import axios from "axios";
 
 function Dashboard() {
   const navigate = useNavigate()
+  const [data,setData] = useState([])
+
+  const fetchData = async () => {
+    const res = await axios.get('http://localhost:8000/getdata');
+    setData(res.data); 
+  };
+
+
+
   function handelclick(){
     navigate('/blogpost')
   }
+  useEffect(()=>{
+  fetchData();
+  },[])
   return (
+    
     <>
     <div className="Hero-section">
       <video autoPlay loop muted className="video-background">
@@ -26,21 +42,17 @@ function Dashboard() {
     </div>
     <div className="all-blogs">
       <div className="scroll-content">
-        <BlogBox></BlogBox>
-        <BlogBox></BlogBox>
-        <BlogBox></BlogBox>
-        <BlogBox></BlogBox>
-        <BlogBox></BlogBox>
-        <BlogBox></BlogBox>
-        <BlogBox></BlogBox>
-        <BlogBox></BlogBox>
-        <BlogBox></BlogBox>
-        <BlogBox></BlogBox>
+        {data.map((name) => (
+            <BlogBox
+              key={name.id}
+              id={name.id}
+              author={name.author}
+              picture={name.picture}
+              title={name.title}
+              category={name.category}
+            />
+          ))}
         </div>
-        <script>
-        const scrollContent = document.querySelector('.scroll-content');
-        scrollContent.innerHTML += scrollContent.innerHTML;
-        </script>
 
     </div>
     </>

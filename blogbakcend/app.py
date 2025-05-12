@@ -40,7 +40,8 @@ con = mysql.connector.connect(
     port=4802,
     user="root",
     password="prasad2005",
-    database="blog_web"
+    database="blog_web",
+    connection_timeout = 60
 )
 
 cur = con.cursor()
@@ -173,3 +174,31 @@ def myblogs(data: MyBlogs):
         })
 
     return {"status": "OK", "blogs": blogs}
+
+@app.get("/getdata")
+def getdata():
+    cur.execute('''
+    SELECT p.id,p.category,p.title,u.username,p.content
+    FROM posts as p
+    INNER JOIN users as u on u.id = p.user_id
+    ORDER BY p.created_at
+    LIMIT 18
+    ''')
+    data = cur.fetchall()
+    blogs = []
+    for post in data:
+        id,category,title,username,content = post
+        picture = extract_first_image(content)
+        blogs.append(
+            {
+                "id":id,
+                "category":category,
+                "title":title,
+                "author":username,
+                "picture":picture
+            }
+        )
+    print('hello')
+    return blogs
+
+
