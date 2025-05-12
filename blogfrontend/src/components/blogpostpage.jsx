@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import Quill from 'quill';
 import ImageResize from 'quill-image-resize-module-react';
+import axios from 'axios';
+import Mycontext from '../context_folder/context';
+import { useNavigate } from 'react-router-dom';
 
 Quill.register('modules/imageResize', ImageResize);
 
@@ -20,15 +23,55 @@ const modules = {
 };
 
 function BlogPostPage() {
+  const navigate = useNavigate();
   const [content, setContent] = useState('');
+  const [title,setTitle] = useState('');
+  const [category,setCategory] = useState('')
+  const {user,setIsLoggedIn,token} = useContext(Mycontext);
+  const handlesubmit = async (e)=>{
+    e.preventDefault();
+    
+    if(content === "" || title === ""){
+      alert("Fill all neccessary fields");
+      return;
+    }
 
+    try{
+      const res = await axios.post("http:localhost:8000/saveblog",
+        {
+          title:title,
+          content:content,
+          username:user,
+          token:token,
+          category:category
+        },
+        {
+          headers:{
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+    }catch(exe){
+      console.log("some error occured");
+      return;
+    }
+    if(res.status === 'Not Logged in'){
+      setIsLoggedIn(false);  
+      navigate("/login");
+      return;
+    }
+    alert("Blog Saved successfully...");
+    navigate("/profile");
+  }
   return (
-    <form className='Blogform'>
+    <form className='Blogform' onSubmit={handlesubmit}>
         <label > Title: </label>
-        <input type="text" name="Title" placeholder='Enter a Title'></input>
+        <input type="text" name="Title" placeholder='Enter a Title' value={title} onChange={(e)=>setTitle(e.target.value)}></input>
+        <label > category: </label>
+        <input type="text" name="category" placeholder='Enter category' value={category} onChange={(e)=>setCategory(e.target.value)}></input>
       <ReactQuill
         value={content}
-        onChange={setContent}
+          onChange={(value) => setContent(value)}
         theme="snow"
         modules={modules}
         placeholder="Write your blog..."

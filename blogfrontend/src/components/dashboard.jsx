@@ -1,6 +1,7 @@
 import bgVideo from "../assets/video.mp4";
 import BlogBox from './blogbox.jsx'
 
+
 function Dashboard() {
   return (
     <>
