@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS posts(
 )""")
 
 print('before')
-cur.execute("ALTER TABLE posts MODIFY content LONGTEXT")
+cur.execute("ALTER TABLE users MODIFY profile_picture LONGBLOB")
 mydb.commit()
 
 print('after')

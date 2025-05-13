@@ -1,10 +1,10 @@
 import { useContext, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Mycontext from '../context_folder/context';
-
 function Navbar() {
   const { isLoggedIn, setIsLoggedIn, setUser, setToken } = useContext(Mycontext);
   const [loginfo, setLoginfo] = useState(isLoggedIn);
+  const [searchvalue,setSearchvalue] = useState("");
 
   useEffect(() => {
     setLoginfo(isLoggedIn);
@@ -31,6 +31,10 @@ function Navbar() {
       <Link to="/signup" className="signup">Sign Up</Link>
     </>
   );
+  const navigate = useNavigate();
+  const handleSubmit = ()=>{
+    navigate(`/search/${searchvalue}`)
+  }
 
   return (
     <nav className="navbar">
@@ -40,13 +44,8 @@ function Navbar() {
         <Link to="/about">About</Link>
         <Link to="/contact">Contact</Link>
       </div>
-      <form action="/search" method="post">
-        <input type="text" name="search-bar" id="search-bar" />
-        <select name="category" id="category">
-          <option value="all">author</option>
-          <option value="tech">category</option>
-          <option value="lifestyle">name of the blog</option>
-        </select>
+      <form onSubmit={handleSubmit}>
+        <input type="text" name="search-bar" id="search-bar" value={searchvalue} onChange={(e)=>(setSearchvalue(e.target.value))}/>
         <button type="submit" className="search-button">Search</button>
       </form>
       <div className="navbar__auth">

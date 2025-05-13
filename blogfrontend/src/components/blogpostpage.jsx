@@ -11,7 +11,7 @@ Quill.register('modules/imageResize', ImageResize);
 
 const modules = {
   toolbar: [
-    [{ header: [1, 2, false] }],
+    [{ header: [1, 2,3, false] }],
     ['bold', 'italic', 'underline'],
     ['link', 'image'],
     [{ list: 'ordered' }, { list: 'bullet' }],
@@ -52,7 +52,7 @@ function BlogPostPage() {
           }
         }
       );
-        if(res.status === 'Not Logged in'){
+        if(res.data.status === 'Not Logged in'){
           setIsLoggedIn(false);  
           navigate("/login");
             return;
