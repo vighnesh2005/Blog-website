@@ -25,9 +25,7 @@ function Myblogbox(props) {
   return (
     <div className="blog">
       <div>
-        <button onClick={handledelete}>
-          <i className="fa-solid fa-trash"></i>
-        </button>
+          <i  onClick={handledelete} className="fa-solid fa-trash"></i>
       </div>
       <img src={props.picture} alt="Blog" className="blog-image" />
       <h1>{props.title}</h1>

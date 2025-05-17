@@ -4,53 +4,275 @@
     box-sizing: border-box;
 }
 body{
-    background-color: #FFCE32;
+    background-color: #363062;
 }
 .navbar{
     position: sticky;
-    padding: 0 20px;
-    z-index: 2;
+    top: 0;
+    z-index: 1000;
     width: 100%;
-    height: 60px;
-    background-color: #FFCE32;
-    border: solid 3px black;
+    height: 70px;
+    background-color: #363062;
     display: flex;
     align-items: center;
-    justify-content: left;
-    padding: 0 20px;
-    top: 0%;
+    justify-content: space-between;
+    padding: 0 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .navbar__logo{
-    font-size: 20px;
+    font-size: 1.5rem;
     font-weight: bold;
-    color:  black;
-        margin: 20px;
-    padding: 10px;
+    color: #F5E8C7;
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
+
+.navbar__logo:hover {
+    color: #fff;
+}
+
+.navbar__content {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    height: 50px;
+}
+
 .essentials{
     display: flex;
-    justify-content: space-around;
-    gap: 20px;  
-    align-items: center;
+    gap: 1.5rem;
 }
+
 .essentials a{
-    color: black;
+    color: #F5E8C7;
     text-decoration: none;
-    font: bold 16px sans-serif;
-    padding: 10px;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.essentials a:hover{
+    color: #fff;
+    background-color: rgba(245, 232, 199, 0.1);
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    background-color: rgba(245, 232, 199, 0.1);
+    border-radius: 25px;
+    padding: 0.3rem;
+    transition: all 0.3s ease;
+    height: 50px;
+}
+
+.search-form:focus-within {
+    background-color: rgba(245, 232, 199, 0.2);
+}
+
+.search-form input {
+    width: 300px;
+    height: 35px;
+    border: none;
+    background: transparent;
+    padding: 0 1rem;
+    color: #F5E8C7;
+    font-size: 0.9rem;
+}
+
+.search-form input::placeholder {
+    color: rgba(245, 232, 199, 0.7);
+}
+
+.search-form input:focus {
+    outline: none;
+}
+
+.search-button {
+    background-color: #F5E8C7;
+    color: #363062;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: #fff;
+    transform: translateY(-1px);
 }
 
 .navbar__auth{
     display: flex;
-    justify-content: space-around;
-    gap: 20px;  
-    align-items: center;
-    position: absolute;
-    right:0%;
-    margin:10px;
-    padding: 10px;
+    gap: 1rem;
 }
+
+.navbar__auth .login,
+.navbar__auth .signup,
+.navbar__auth .profile {
+    padding: 0.5rem 1.2rem;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.navbar__auth .login,
+.navbar__auth .profile {
+    color: #F5E8C7;
+    border: 2px solid #F5E8C7;
+}
+
+.navbar__auth .signup {
+    background-color: #F5E8C7;
+    color: #363062;
+}
+
+.navbar__auth .login:hover,
+.navbar__auth .profile:hover {
+    background-color: #F5E8C7;
+    color: #363062;
+}
+
+.navbar__auth .signup:hover {
+    background-color: #fff;
+}
+
+.navbar__auth .logout {
+    background-color: #F5E8C7;
+    color: #363062;
+    border: none;
+    padding: 0.5rem 1.2rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.navbar__auth .logout:hover {
+    background-color: #fff;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 10;
+}
+
+.hamburger span {
+    width: 100%;
+    height: 3px;
+    background-color: #F5E8C7;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+@media (max-width: 1024px) {
+    .navbar {
+        padding: 0 1rem;
+    }
+
+    .search-form input {
+        width: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .Hero pre{
+        width: 100%;
+        font-size: 10px;
+    }
+
+    .navbar__content {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background-color: #363062;
+        flex-direction: column;
+        padding: 2rem;
+        gap: 1.5rem;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .navbar__content.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .essentials {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .search-form {
+        width: 100%;
+    }
+
+    .search-form input {
+        width: 100%;
+    }
+
+    .navbar__auth {
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
+
+    .navbar__auth .login,
+    .navbar__auth .signup,
+    .navbar__auth .profile,
+    .navbar__auth .logout {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 0 0.5rem;
+    }
+
+    .navbar__logo {
+        font-size: 0.5rem;
+    }
+    .Hero pre{
+        font-size: 5px;
+    }
+}
+
 .Hero-section{
     display: flex;
     justify-content: center;
@@ -60,51 +282,51 @@ body{
     overflow-x: hidden;
 }
 .navbar__auth .login{
-    color:#1D63FF;
+    color:#F5E8C7;
     text-decoration: none;
-    border: solid 3px #1D63FF;
+    border: solid 3px #F5E8C7;
     padding: 10px;
     border-radius: 10px;
 }
 .navbar__auth .signup{
-    background-color: #1D63FF;
+    background-color: #F5E8C7;
     text-decoration: none;
-    color: white;
-    border: solid 3px #1D63FF;
+    color: black;
+    border: solid 3px #F5E8C7;
     padding: 10px;
     border-radius: 10px;
 }
 
 .navbar__auth .login:hover{
-    background-color: #1D63FF;
-    color: white;
+    background-color: #F5E8C7;
+    color: black;
     transition: 0.5s;
 }
 .navbar__auth .signup:hover{
-    background-color: #FFCE32;
-    color: #1D63FF;
+    background-color: #363062;
+    color: #F5E8C7;
     transition: 0.5s;
 }
 
 .navbar__auth .profile{
-    color: #1D63FF;
+    color: #F5E8C7;
     text-decoration: none;
-    border: solid 3px #1D63FF;
+    border: solid 3px #F5E8C7;
     padding: 10px;
     border-radius: 10px;
 }
 
 .navbar__auth .profile:hover{
-    background-color: #1D63FF;
-    color: white;
+    background-color: #F5E8C7;
+    color: black;
     transition: 0.5s;
 }
 
 .navbar__auth .logout{
-    color: white;
-    background-color: #1D63FF;
+    color: black;
+    background-color: #F5E8C7;
     text-decoration: none;
-    border: solid 3px #1D63FF;
+    border: solid 3px #F5E8C7;
     padding: 10px;
     border-radius: 10px;
 }
@@ -112,7 +334,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #FFCE32;
+    background-color: #363062;
     margin: 5rem;
     border-radius: 10px;
 }
@@ -121,20 +343,22 @@ body{
     width: 400px;
     height: 40px;
     border-radius: 10px;
-    border:solid 3px brown;
+    border:solid 3px #F5E8C7;
     font-size: larger;
-    padding:5px;
+    padding:10px;
+    color:#F5E8C7;
     border-right: none;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
-    background-color: #FFCE32;
+    background-color: #363062;
+    
 }
 
 .navbar form button{
     width: 100px;
     height: 40px;
-    border:solid 3px brown;
-    background-color: orangered;
+    border:solid 3px #F5E8C7;
+    background-color: rgb(2, 1, 1);
     border-radius: 10px;
     color: white;
     font-weight: bold;
@@ -153,7 +377,7 @@ body{
 
 .navbar form input:hover{
     border:solid 3px orangered;
-    background-color: #FFCE32;
+    background-color: #363062;
     transition: 0.5s;
     width: 405px;
     height: 42px;
@@ -161,7 +385,7 @@ body{
 
 .navbar form input:focus{
     border:solid 3px red;
-    background-color: #FFCE32;
+    background-color: #363062;
     transition: 0.5s;
 }
 
@@ -174,21 +398,21 @@ body{
     font-size: larger;
     padding:5px;
     border-right: none;
-    background-color: #FFCE32;
+    background-color: #363062;
     overflow: auto;
 }
 
 .navbar form select:hover{
     border:solid 3px orangered;
-    background-color: #FFCE32;
+    background-color: #363062;
     transition: 0.5s;
     width: 135px;
     height: 42px;
 }
 
 .navbar__auth .logout:hover{
-    background-color: #FFCE32;
-    color: #1D63FF;
+    background-color: #363062;
+    color: #F5E8C7;
     transition: 0.5s;
 }
 
@@ -208,7 +432,7 @@ body{
 .signup-container h1{
     font-size: 30px;
     font-weight: bold;
-    color: #1D63FF;
+    color: #F5E8C7;
 }
 
 .signup-container div{
@@ -216,7 +440,7 @@ body{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: white;
+    background-color: black;
     padding: 20px;
     border-radius: 10px;
 }
@@ -225,7 +449,7 @@ body{
     width: 300px;
     height: 40px;
     border-radius: 10px;
-    border: solid 2px #1D63FF;
+    border: solid 2px #F5E8C7;
     padding: 10px;
     margin: 20px;
     overflow: auto;
@@ -238,9 +462,9 @@ body{
     width: 300px;
     height: 40px;
     border-radius: 10px;
-    border: solid 2px #1D63FF;
-    background-color: #1D63FF;
-    color: white;
+    border: solid 2px #F5E8C7;
+    background-color: #F5E8C7;
+    color: black;
     font-weight: bold;
     cursor: pointer;
     margin: 20px;
@@ -248,7 +472,7 @@ body{
   
 .video-background {
     position: relative;
-    color: white;
+    color: black;
     text-align: center;
     width: 100%;
     height: 60%;
@@ -257,13 +481,12 @@ body{
     align-items: center;
   }
   
-.Hero{
+.Hero {
     position: absolute;
-    width: 100%;
-    z-index: 1;
-    top: 40%;
+    width: 80%;
     left: 10%;
 }
+
 .Hero pre{
     padding: 20px;
     border-radius: 10px;
@@ -276,7 +499,7 @@ body{
 
 .all-blogs {
     width: 100%;
-    overflow: hidden;
+    overflow: auto;
     position: relative;
     padding: 15px 0;
     border: solid 3px black;    
@@ -284,6 +507,8 @@ body{
 
 .scroll-content {
     display: flex;
+    width: 100%;
+    flex-wrap: nowrap;
     width: max-content;
     animation: scroll 20s linear infinite;
 }
@@ -326,12 +551,12 @@ body{
 
 .all-blogs::before {
     left: 0;
-    background: linear-gradient(to right, #FFCE32 0%, rgba(255,255,255,0) 100%);
+    background: linear-gradient(to right, #363062 0%, rgba(255,255,255,0) 100%);
 }
 
 .all-blogs::after {
     right: 0;
-    background: linear-gradient(to left, #FFCE32 0%, rgba(255,255,255,0) 100%);
+    background: linear-gradient(to left, #363062 0%, rgba(255,255,255,0) 100%);
 }
 
 
@@ -341,7 +566,7 @@ body{
     justify-content: space-between;
     gap: 10px;
     flex-direction: column;
-    background-color: white;
+    background-color: #435585;
     padding: 20px;
     border: solid 2px black;
     border-radius: 10px;
@@ -354,7 +579,7 @@ body{
 .blog img{
     width: 100%;
     height: 80%;
-    border: solid 2px black;    
+    border: solid 2px #F5E8C7;    
     border-radius: 10px;
     margin-bottom: 10px;
 }
@@ -362,97 +587,7 @@ body{
 .blog:hover{
     transition: 0.5s;
     transform: scale(1.05);
-    box-shadow: 5px 5px 10px black;
-}
-
-@media (max-width: 1300px) {
-    .navbar {
-        height: auto; /* Allow dynamic height based on content */
-        min-height: 220px; /* Set a minimum height to avoid crowding */
-        position: relative;
-        display: flex;
-        flex-direction: column; /* Stack items vertically */
-        padding: 10px 20px;
-        background-color: #FFCE32;
-        border: solid 3px black;
-        gap: 10px; /* spacing between stacked items */
-    }
-    
-    /* Ensure inner navbar sections do not overflow */
-    .navbar__logo {
-        font-size: 24px;
-        font-weight: bold;
-        color: black;
-        margin-bottom: 10px;
-    }
-    
-    .essentials {
-        display: flex;
-        justify-content: flex-start;
-        gap: 20px;
-        align-items: center;
-        flex-wrap: wrap;
-        margin-bottom: 10px;
-    }
-    
-    .navbar form {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 10px 0;
-        flex-wrap: wrap;
-    }
-    
-    /* Adjust buttons to be centered and not overflow */
-    .navbar__auth {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 10px;
-    }
-
-}
-
-
-
-
-@media (max-width: 700px) {
-    .Hero pre{
-        font-size: 30px;
-    }
-    .navbar form input {
-        width: 250px;
-        height: 35px;
-        font-size: medium;
-    }
-
-    .navbar form button {
-        width: 80px;
-        height: 35px;
-        font-size: medium;
-    }
-
-    .navbar form select {
-        width: 100px;
-        height: 35px;
-        font-size: medium;
-    }
-
-    .navbar form input:hover {
-        width: 255px;
-        height: 37px;
-    }
-
-    .navbar form select:hover {
-        width: 105px;
-        height: 37px;
-    }
-
-    .navbar form button:hover {
-        width: 85px;
-        height: 37px;
-    }
+    box-shadow: 5px 5px 10px #F5E8C7;
 }
 
 .create-blog{
@@ -467,31 +602,32 @@ body{
     width: 300px;
     height: 40px;
     border-radius: 10px;
-    border: solid 2px #1D63FF;
-    background-color: #1D63FF;
-    color: white;
+    border: solid 2px #F5E8C7;
+    background-color: #F5E8C7;
+    color: black;
     font-weight: bold;
     cursor: pointer;
     margin: 20px;
 }
 
 .create-blog button:hover{
-    background-color: #FFCE32;
-    color: #1D63FF;
+    background-color: #363062;
+    color: #F5E8C7;
     transition: 0.5s;
 }
 
 .Blogform label{
     font-size: 20px;
     font-weight: bolder;
-    color: black
+    color: #F5E8C7;
+    padding:10px;
 }
 
 .Blogform input{
     width: 300px;
     height: 40px;
     border-radius: 10px;
-    border: solid 2px #1D63FF;
+    border: solid 2px #F5E8C7;
     padding: 10px;
     margin: 20px;
     overflow: auto;
@@ -504,12 +640,30 @@ body{
     width: 300px;
     height: 40px;
     border-radius: 10px;
-    border: solid 2px #1D63FF;
-    background-color: #1D63FF;
-    color: white;
+    border: solid 2px #F5E8C7;
+    background-color: #F5E8C7;
+    color: black;
     font-weight: bold;
     cursor: pointer;
     
+}
+
+.blog button{
+    background-color: #435585;
+}
+
+.fa-solid{
+    color: black;   
+}
+
+.fa-solid:hover{
+    color: #F5E8C7;
+    transition: 0.5s;
+}
+
+.searchresults-container a{
+    text-decoration: none;
+
 }
 
 .react-quill {
@@ -536,8 +690,8 @@ body{
 }
 
 .Blogform button:hover{
-    background-color: #FFCE32;
-    color: #1D63FF;
+    background-color: #363062;
+    color: #F5E8C7;
     transition: 0.5s;
 }
 
@@ -553,11 +707,21 @@ body{
 .blog div{
     display: flex;
     justify-content: right;
+    background-color: #435585;
 }
 
-.blog i{
-    margin: 5px;
+.blog p{
+    color: #F5E8C7;    
 }
+.blog h1 {
+    color: #F5E8C7;
+    white-space: nowrap;      /* Prevents text from wrapping */
+    overflow-x: hidden;   
+    overflow-y: auto;
+    /* Hides overflow */
+    text-overflow: ellipsis;  /* Shows "..." when text overflows */
+}
+
 
 .Profile{
     display: flex;
@@ -596,17 +760,17 @@ body{
     width: 150px;
     height: 40px;
     border-radius: 10px;
-    border: solid 2px #1D63FF;
-    background-color: #1D63FF;
-    color: white;
+    border: solid 2px #F5E8C7;
+    background-color: #F5E8C7;
+    color: black;           
     font-weight: bold;
     cursor: pointer;
     margin: 20px;
 }
 
 .myprofile button:hover{
-    background-color: #FFCE32;
-    color: #1D63FF;
+    background-color: #363062;
+    color: #F5E8C7;
     transition: 0.5s;
 }   
 
@@ -614,7 +778,7 @@ body{
     width: 300px;
     height: 40px;
     border-radius: 10px;
-    border: solid 2px #1D63FF;
+    border: solid 2px #F5E8C7;
     padding: 10px;
     overflow: auto;
     font-family: Georgia, 'Times New Roman', Times, serif;
@@ -623,15 +787,15 @@ body{
 }   
 
 .myprofile form input:hover{
-    background-color: #FFCE32;
-    color: #1D63FF;
+    background-color: #363062;
+    color: #F5E8C7;
     transition: 0.5s;
 }   
 
 .myprofile h1{
     font-size: 30px;
     font-weight: bold;
-    color: #1D63FF;
+    color: #F5E8C7;
 }
 
 .myprofile p{
@@ -643,17 +807,19 @@ body{
 
 .myprofile a{
     text-decoration: none;
-    color: white;
+    color: #F5E8C7;
     font-weight: bold;
     font-size: 20px;
     background-color: black;
     padding: 10px;
     border-radius: 10px;
+    margin: 10px;   
 }
 
 .myprofile a:hover{
-    background-color: white;
+    background-color: #F5E8C7;
     color: black;
+    
 }
 
 .viewpost {
@@ -661,9 +827,9 @@ body{
     flex-direction: column;
     justify-content: flex-start;
     height: 100vh;
-    background-color: #fdf6e3; /* Elegant light cream */
+    background-color: #363062; /* Deep muted purple */
     padding: 2rem;
-    gap: 1.5rem; /* Adds space between elements */
+    gap: 1.5rem;
 }
 
 .viewpost .h1, 
@@ -671,37 +837,37 @@ body{
 .viewpost .h3,
 .viewpost div {
     border: none;
-    background-color: #ffffff;
+    background-color: #F5E8C7; /* Soft cream cards */
     padding: 1rem 1.5rem;
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #2e2e2e;
+    color: #1f1f1f; 
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .viewpost .h1 {
     font-size: 2rem;
     font-weight: 700;
-    color: #1f618d; /* Deep navy */
+    color: #222048; 
 }
 
 .viewpost .h2 {
     font-size: 1.5rem;
     font-weight: 600;
-    color: #ff6f61; /* Coral */
+    color: #5C5470;
 }
 
 .viewpost .h3 {
     font-size: 1.25rem;
     font-weight: 500;
-    color: #6c3483; 
+    color: #6C5B7B; 
 }
 
 .viewpost div {
     font-size: 1rem;
     line-height: 1.6;
-    color: #333333;
+    color: #2e2e2e;
 }
 
 .viewpost .h1:hover,
@@ -709,5 +875,16 @@ body{
 .viewpost .h3:hover,
 .viewpost div:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
 }
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #2C2A4A;
+}
+::-webkit-scrollbar-thumb {
+    background: #F5E8C7;
+    border-radius: 5px;
+}
+

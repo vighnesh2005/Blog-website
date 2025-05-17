@@ -4,12 +4,16 @@ import { Link, useNavigate } from "react-router-dom";
 import Mycontext from "../context_folder/context";
 
 function Myprofile() {
-  const { user, token, setIsLoggedIn } = useContext(Mycontext);
+  const { isLoggedIn,user, token, setIsLoggedIn } = useContext(Mycontext);
   const [photo, setPhoto] = useState("");
   const [fileStr, setFileStr] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
+    if(isLoggedIn === false){
+      alert("please login first");
+      navigate('/login');
+    }
     const prof = async () => {
       try {
         const res = await axios.post("http://localhost:8000/profile", {

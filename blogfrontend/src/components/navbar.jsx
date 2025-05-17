@@ -1,10 +1,12 @@
 import { useContext, useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Mycontext from '../context_folder/context';
+
 function Navbar() {
   const { isLoggedIn, setIsLoggedIn, setUser, setToken } = useContext(Mycontext);
   const [loginfo, setLoginfo] = useState(isLoggedIn);
-  const [searchvalue,setSearchvalue] = useState("");
+  const [searchvalue, setSearchvalue] = useState("");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     setLoginfo(isLoggedIn);
@@ -22,34 +24,59 @@ function Navbar() {
 
   const authLinks = loginfo ? (
     <>
-      <Link to="/myprofile" className="profile">Profile</Link>
+      <Link to="/myprofile" className="profile" onClick={() => setIsMenuOpen(false)}>Profile</Link>
       <button className='logout' onClick={handlelogout}>Logout</button>
     </>
   ) : (
     <>
-      <Link to="/login" className="login">Login</Link>
-      <Link to="/signup" className="signup">Sign Up</Link>
+      <Link to="/login" className="login" onClick={() => setIsMenuOpen(false)}>Login</Link>
+      <Link to="/signup" className="signup" onClick={() => setIsMenuOpen(false)}>Sign Up</Link>
     </>
   );
+
   const navigate = useNavigate();
-  const handleSubmit = ()=>{
-    navigate(`/search/${searchvalue}`)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate(`/search/${searchvalue}`);
+    setIsMenuOpen(false);
   }
 
   return (
     <nav className="navbar">
       <div className="navbar__logo">Blog Buddy</div>
-      <div className="essentials">
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
-        <Link to="/contact">Contact</Link>
-      </div>
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="search-bar" id="search-bar" value={searchvalue} onChange={(e)=>(setSearchvalue(e.target.value))}/>
-        <button type="submit" className="search-button">Search</button>
-      </form>
-      <div className="navbar__auth">
-        {authLinks}
+      
+      <button 
+        className={`hamburger ${isMenuOpen ? 'active' : ''}`} 
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+        aria-label="Toggle menu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <div className={`navbar__content ${isMenuOpen ? 'active' : ''}`}>
+        <div className="essentials">
+          <Link to="/" onClick={() => setIsMenuOpen(false)}>Home</Link>
+          <Link to="/about" onClick={() => setIsMenuOpen(false)}>About</Link>
+          <Link to="/contact" onClick={() => setIsMenuOpen(false)}>Contact</Link>
+        </div>
+
+        <form onSubmit={handleSubmit} className="search-form">
+          <input 
+            type="text" 
+            name="search-bar" 
+            id="search-bar" 
+            placeholder="Search..." 
+            value={searchvalue} 
+            onChange={(e) => setSearchvalue(e.target.value)}
+          />
+          <button type="submit" className="search-button">Search</button>
+        </form>
+
+        <div className="navbar__auth">
+          {authLinks}
+        </div>
       </div>
     </nav>
   );

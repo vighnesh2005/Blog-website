@@ -9,16 +9,30 @@ import { useNavigate } from 'react-router-dom';
 
 Quill.register('modules/imageResize', ImageResize);
 
+
 const modules = {
   toolbar: [
-    [{ header: [1, 2,3, false] }],
-    ['bold', 'italic', 'underline'],
-    ['link', 'image'],
+    [{ font: [] }],
+    [{ size: ['small', false, 'large', 'huge'] }],  
+
+    [{ header: [1, 2, 3, 4, 5, 6, false] }],
+    ['bold', 'italic', 'underline', 'strike'],  
+
+    [{ color: [] }, { background: [] }], 
+    [{ script: 'sub' }, { script: 'super' }],  
+
     [{ list: 'ordered' }, { list: 'bullet' }],
-    ['clean']
+    [{ indent: '-1' }, { indent: '+1' }], 
+    [{ direction: 'rtl' }], 
+
+    [{ align: [] }],
+    ['blockquote', 'code-block'],
+
+    ['link', 'image', 'video'],
+    ['clean'] 
   ],
-  imageResize: {    
-    parchment: Quill.import('parchment')
+  imageResize: {
+    parchment: Quill.import('parchment'),
   }
 };
 
